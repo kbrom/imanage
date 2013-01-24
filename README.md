@@ -1,4 +1,4 @@
-imanage
+iManage
 =======
 
-iManage is state of the art project management web app!
+iManage is state of the art project management sexy web app!
