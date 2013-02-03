@@ -1,0 +1,1 @@
+This is the /home/imanage/Projects/imanage/application/views/project/index.blade.php view
