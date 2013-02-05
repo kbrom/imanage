@@ -33,19 +33,31 @@
 */// user Resource
 Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
 Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
-Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
-Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
-Route::post('users', 'users@create');
+
+//Registering Routes
+Route::get('register', array('as' => 'new_user', 'uses' => 'users@new'));
+Route::post('register', array('before'=>'csrf', 'uses' => 'users@create'));
+
+//Logining in Routes
+Route::get('login', array('as' => 'login', 'uses' => 'users@login'));
+Route::post('login', array('before'=>'csrf','uses'=>'users@login'));
+
+Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@create'));
 Route::put('users/(:any)', 'users@update');
 Route::delete('users/(:any)', 'users@destroy');
 
+// project Resource
+Route::get('projects', array('as' => 'projects', 'uses' => 'projects@index'));
+Route::get('projects/(:any)', array('as' => 'project', 'uses' => 'projects@show'));
+Route::get('projects/new', array('as' => 'new_project', 'uses' => 'projects@new'));
+Route::get('projects/(:any)/edit', array('as' => 'edit_project', 'uses' => 'projects@edit'));
+Route::post('projects', 'projects@create');
+Route::put('projects/(:any)', 'projects@update');
+Route::delete('projects/(:any)', 'projects@destroy');
 
-Route::controller(Controller::detect());
-Route::get('/', function()
-{
-	return View::make('home.index');
-});
 
+//Home Routes
+Route::get('/',array('as'=>'home', 'uses'=>'home.index'));
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

@@ -32,7 +32,7 @@ class Home_Controller extends Base_Controller {
 
 	public function action_index()
 	{
-		    View::make('home')->nest('footer', 'partials.footer');
+		   return View::make('home.index');
 	}
 
 }

@@ -1,57 +1,70 @@
-<!doctype html>
-<html lang="en">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-	<title>Laravel: A Framework For Web Artisans</title>
-	<meta name="viewport" content="width=device-width">
-	{{ HTML::style('laravel/css/style.css') }}
-</head>
-<body>
-	<div class="wrapper">
-		<header>
-			<h1>Laravel</h1>
-			<h2>A Framework For Web Artisans</h2>
+@layout('master')
+@section('content')
+<div class="row">
+	<div class="span3">
+		<h1>iManage</h1>
+		<h4>Project Management Just Got Easier!</h4>
+	</div>
 
-			<p class="intro-text" style="margin-top: 45px;">
-			</p>
-		</header>
-		<div role="main" class="main">
-			<div class="home">
-				<h2>Learn the terrain.</h2>
+	<div class="span5">
+		<form class="form-search">
+			<input type="text" data-behavior="placeholder" placeholder="Jump to a project or person" data-hotkey="f">
+			<button type="submit" class="btn">Search</button>
+		</form>
+	</div>
+</div>
+<hr>
 
-				<p>
-					You've landed yourself on our default home page. The route that
-					is generating this page lives at:
-				</p>
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+	<div class="row">
+		<div class="span5">
+			<ul class="nav nav-pills">
+				<li class="active">
+					<a href="#">Projets</a>
+				</li>
 
-				<pre>{{ path('app') }}routes.php</pre>
+				<li>
+					<a href="#">People</a>
+				</li>
 
-				<p>And the view sitting before you can be found at:</p>
+				<li>
+					<a href="projects.html">Tasks</a>
+				</li>
+				<li>
+					<a href="#">Files</a>
+				</li>
+				<li>
+					<a href="#">Discussions</a>
+				</li>
+			</ul>
+		</div>
 
-				<pre>{{ path('app') }}views/home/index.blade.php</pre>
+	</div>
+	<hr>
+	<!-- Example row of columns -->
 
-				<h2>Grow in knowledge.</h2>
+	<div class="row">
+		<div class="span2">
 
-				<p>
-					Learning to use Laravel is amazingly simple thanks to
-					its {{ HTML::link('docs', 'wonderful documentation') }}.
-				</p>
+			<img src="img/malaptop.jpg" alt="Employee Thumb"></div>
 
-				<h2>Create something beautiful.</h2>
-
-				<p>
-					Now that you're up and running, it's time to start creating!
-					Here are some links to help you get started:
-				</p>
-
-				<ul class="out-links">
-					<li><a href="http://laravel.com">Official Website</a></li>
-					<li><a href="http://forums.laravel.com">Laravel Forums</a></li>
-					<li><a href="http://github.com/laravel/laravel">GitHub Repository</a></li>
-				</ul>
+		<div class="span6">
+			<div class="span3"> <strong>Name:</strong> <em class="text-info">Tekeste G.anenia</em>
+			</div>
+			<div class="span3"> <strong>Skill:</strong> <em class="text-info">html,css,jquery...</em>
+			</div>
+			<div class="span3">
+				<strong>Contact:</strong>
+				<em class="text-info">email,call</em>
+			</div>
+			<div class="span3">
+				<strong>Working On:</strong>
+				<em class="text-info">9 tasks from 4 projects</em>
 			</div>
 		</div>
+		<div class="span9">Short Bio</div>
+
 	</div>
- </body>
-</html>
+</div>
+@endsection
