@@ -6,7 +6,14 @@ class Projects_Controller extends Base_Controller {
 
 	public function get_index()
     {
+        $user_id=Auth::user()->id;
+        //$project_id=1;
+        //$user=User::find($user_id);
+        //$user->projects()->attach($project_id);
+               //dd($projects);
 
+       $projects=User::find($user_id)->projects()->get();
+       return View::make('project.index')->with('projects',$projects);
     }    
 
 	public function post_index()
@@ -26,7 +33,7 @@ class Projects_Controller extends Base_Controller {
 
 	public function get_new()
     {
-
+        return View::make('project.new');
     }    
 
 	public function put_update()

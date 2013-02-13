@@ -6,7 +6,12 @@ class Users_Controller extends Base_Controller {
 
     public function get_index()
     {
-        return 'Hi there ';
+        //dd(User::find(2)->roles()->get());
+        //dd(Role::all());
+        $email="abel.adam6@gmail.com";
+       // dd(User::where('email', '=', $email)->first());
+    //User::find(1)->roles()->attach(2);
+
     }    
 
     public function get_login()
@@ -22,26 +27,33 @@ class Users_Controller extends Base_Controller {
             );
         if(Auth::attempt($user))
         {
-            return Redirect::to_route('home');
+            return Redirect::to_route('projects')
+                                ->with('title','projects');
+;
         }
         else
         {
-            return 'login not succesful';
+             return Redirect::to_route('login')
+                    ->with('login_errors', true);
         }
     }
 
     public function post_create()
     {
         // Add Validation Here
-        User::create(array(
+        $role_id=Input::get('role');
+        $input=array(
             'fname'=>Input::get('fname'),
             'lname'=>Input::get('lname'),
             'email'=>Input::get('email'),
             'password'=>Hash::Make(Input::get('pass')),
             'phone'=>Input::get('phone'),
             'skills'=>Input::get('skills'),
-            'role'=>Input::get('role')
-            ));
+            );
+        $user=User::create($input);
+        $user->roles()->attach($role_id);
+        //            
+
     }    
 
     public function get_show($id)

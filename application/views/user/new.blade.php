@@ -62,9 +62,9 @@
 				<label class="control-label">Role</label>
 				<div class="controls">
 					<select class="input-large" id="role" name="role">
-						<option>Supervisor</option>
-						<option>Project Manager</option>
-						<option>Member</option>
+						<option value="1">Supervisor</option>
+						<option value="2">Project Manager</option>
+						<option value="3">Member</option>
 					</select>
 				</div>
 			</div>

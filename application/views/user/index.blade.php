@@ -1,1 +1,1 @@
-This is the /home/imanage/Projects/imanage/application/views/user/index.blade.php view
+{{$title}}

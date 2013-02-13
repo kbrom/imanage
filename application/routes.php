@@ -31,8 +31,23 @@
 |		});
 |
 */// user Resource
-Route::get('users', array('as' => 'users', 'uses' => 'users@index'));
+Route::get('users', array('as' => 'users', 'before'=>'auth','uses' => 'users@index'));
+Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
+Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@create'));
+Route::put('users/(:any)', 'users@update');
+Route::delete('users/(:any)', 'users@destroy');
+
+// job Resource
+Route::get('jobs', array('as' => 'jobs', 'uses' => 'jobs@index'));
+Route::get('jobs/(:any)', array('as' => 'job', 'uses' => 'jobs@show'));
+Route::get('projects/jobs/new', array('as' => 'new_job', 'uses' => 'jobs@new'));
+Route::get('projects/(:num)', array('as' => 'project_jobs', 'uses' => 'jobs@index'));
+Route::get('jobs/(:any)/edit', array('as' => 'edit_job', 'uses' => 'jobs@edit'));
+Route::post('jobs', 'jobs@create');
+Route::put('jobs/(:any)', 'jobs@update');
+Route::delete('jobs/(:any)', 'jobs@destroy');
+
 
 //Registering Routes
 Route::get('register', array('as' => 'new_user', 'uses' => 'users@new'));
@@ -42,12 +57,10 @@ Route::post('register', array('before'=>'csrf', 'uses' => 'users@create'));
 Route::get('login', array('as' => 'login', 'uses' => 'users@login'));
 Route::post('login', array('before'=>'csrf','uses'=>'users@login'));
 
-Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@create'));
-Route::put('users/(:any)', 'users@update');
-Route::delete('users/(:any)', 'users@destroy');
+
 
 // project Resource
-Route::get('projects', array('as' => 'projects', 'uses' => 'projects@index'));
+Route::get('projects', array('as' => 'projects','before'=>'auth', 'uses' => 'projects@index'));
 Route::get('projects/(:any)', array('as' => 'project', 'uses' => 'projects@show'));
 Route::get('projects/new', array('as' => 'new_project', 'uses' => 'projects@new'));
 Route::get('projects/(:any)/edit', array('as' => 'edit_project', 'uses' => 'projects@edit'));
@@ -57,7 +70,12 @@ Route::delete('projects/(:any)', 'projects@destroy');
 
 
 //Home Routes
-Route::get('/',array('as'=>'home', 'uses'=>'home.index'));
+Route::get('/',array('as'=>'home', 'uses'=>'home@index'));
+
+
+//Authenticate
+Route::filter('pattern: users/*', 'auth');
+Route::filter('pattern: projects/*', 'auth');
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

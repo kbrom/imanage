@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dynamically add title</title>
+  <title>{{Session::get('title')}}</title>
   <!-- Bootstrap -->
   {{ HTML::style('css/vendors/bootstrap.css')}}
    {{ HTML::style('css/style.css')}}
