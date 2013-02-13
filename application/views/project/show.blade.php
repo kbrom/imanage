@@ -1,1 +1,50 @@
-This is the /home/imanage/Projects/imanage/application/views/project/show.blade.php view
+@layout('master')
+@section('content')
+<div class="row">
+  <div class="span3">
+    <h1>iManage</h1>
+    <h4>Project Management Just Got Easier!</h4>
+  </div>
+
+  <div class="span5">
+    <form class="form-search">
+      <input type="text" data-behavior="placeholder" placeholder="Jump to a project or person" data-hotkey="f">
+      <button type="submit" class="btn">Search</button>
+    </form>
+  </div>
+</div>
+<hr>
+
+<!-- Main hero unit for a primary marketing message or call to action -->
+<div class="hero-unit">
+  <div class="row">
+        <div class="span5">
+          <ul class="nav nav-pills">
+            <li><a href="#">People</a></li>
+            <li><a href="#">Task</a></li>
+            <li><a href="#">Files</a></li>
+            <li><a href="#">Discussions</a></li>
+        </ul>
+        </div>
+
+      </div>
+  <hr>
+  <!-- Example row of columns -->
+
+      <div class="row">
+        <div class="span2">
+
+          <img src="" alt="project Thumb">
+        </div>
+      <div class="span6">
+          <div class="span3"><strong>Title: </strong><em class="text-info">{{Str::title($title)}}</em></div>
+          <div class="span3"><strong>Project Manager: </strong><em class="text-info">{{$pm_id}}</em></div>
+          <div class="span3"><strong>Start Date: </strong><em class="text-info">{{Str::limit($startdate,10)}}</em></div>
+          <div class="span3"><strong>End Date: </strong><em class="text-info">{{Str::limit($enddate,10)}}</em></div>
+          <div class="span3"><strong>Status: </strong><em class="text-info">{{Str::title($status)}}</em></div>
+      </div>
+<div class="span9">{{$shortdesc}}</div>
+        
+ </div>
+</div>
+@endsection

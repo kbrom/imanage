@@ -6,7 +6,7 @@ class Jobs_Controller extends Base_Controller {
 
 	public function get_index($id)
     {
-        retrun '$id';
+       
     }    
 
 	public function post_create()

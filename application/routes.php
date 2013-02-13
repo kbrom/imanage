@@ -40,9 +40,7 @@ Route::delete('users/(:any)', 'users@destroy');
 
 // job Resource
 Route::get('jobs', array('as' => 'jobs', 'uses' => 'jobs@index'));
-Route::get('jobs/(:any)', array('as' => 'job', 'uses' => 'jobs@show'));
-Route::get('projects/jobs/new', array('as' => 'new_job', 'uses' => 'jobs@new'));
-Route::get('projects/(:num)', array('as' => 'project_jobs', 'uses' => 'jobs@index'));
+Route::get('jobs/new', array('as'=>'new_job', 'uses'=>'jobs@new'));
 Route::get('jobs/(:any)/edit', array('as' => 'edit_job', 'uses' => 'jobs@edit'));
 Route::post('jobs', 'jobs@create');
 Route::put('jobs/(:any)', 'jobs@update');
@@ -75,6 +73,7 @@ Route::get('/',array('as'=>'home', 'uses'=>'home@index'));
 
 //Authenticate
 Route::filter('pattern: users/*', 'auth');
+Route::filter('pattern: /*', 'auth');
 Route::filter('pattern: projects/*', 'auth');
 /*
 |--------------------------------------------------------------------------

@@ -21,7 +21,7 @@
 		<div class="span5">
 			<ul class="nav nav-pills">
 				<li class="active">
-					<a href="#">Projets</a>
+					<a href="/projects">Projets</a>
 				</li>
 
 				<li>
@@ -34,9 +34,11 @@
 				<li>
 					<a href="#">Files</a>
 				</li>
+				@if(Auth::check())
 				<li>
-					<a href="#">Discussions</a>
+					<a href="{{Auth::logout();}}">Logout</a>
 				</li>
+				@endif
 			</ul>
 		</div>
 

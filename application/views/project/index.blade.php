@@ -26,15 +26,14 @@
 	<div class="row">
 	@foreach ($projects as $project) 
 		
-	
-		<div class="span2">
+			<div class="span2">
 
 			<h3>{{Str::title($project->title)}}</h3>
-			<h4>10 Tasks</h4>
-			<h4>21 Members</h4>
+			<h4>{{Project::find($project->id)->jobs()->count();}} Tasks</h4>
+			<h4>{{Project::find($project->id)->users()->count();}} Members</h4>
 			<div class="dropdown">
 				<div class="btn-group">
-					<a class="btn" href="#">View &raquo;</a>
+					<a class="btn" href="projects/{{$project->id}}">View &raquo;</a>
 					@if($project->sup_id==Auth::user()->id)
 
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
@@ -43,8 +42,14 @@
 					</button>
 					<ul class="dropdown-menu">
 					@if($project->pm_id==Auth::user()->id)
-						<li>
-							<a data-target="#myModal" role="button" data-toggle="modal">Edit</a>
+						<li class="dropdown-submenu">
+							<a tabindex="-1" href="#">Update</a>
+
+					<ul class="dropdown-menu">
+						<li><a tabindex="-1" href="jobs/new">Add Task</a></li>
+						<li><a tabindex="-1" href="users/new">Add Member</a></li>
+						<li><a tabindex="-1" href="projects/{{$project->id}}/edit">Edit</a></li>
+					</ul>
 						</li>
 						<li>
 							<a data-target="#" href="#">Close</a>
@@ -64,17 +69,6 @@
 			</div>
 		</div>
 @endforeach
-		<div class="span2 new">
-
-			<h3>Add New</h3>
-			<p>
-				<button href="{{URL::to_route('new_user')}}" class="btn btn-success btn-large" type="button"> <i class="icon-plus-sign"></i>
-					add
-				</button>
-			</p>
-
-		</div>
-
 	</div>
 	</div>
 	@endsection

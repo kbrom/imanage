@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>{{Session::get('title')}}</title>
+  <title>Title</title>
   <!-- Bootstrap -->
   {{ HTML::style('css/vendors/bootstrap.css')}}
    {{ HTML::style('css/style.css')}}
    {{HTML::script('js/vendors/jquery-latest.js')}}
    {{HTML::script('js/vendors/bootstrap.js')}}
+    <script src="http://code.jquery.com/ui/1.10.0/jquery-ui.js"></script>
+     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.0/themes/base/jquery-ui.css" />
 </head>
 <body>
   <div class="container">

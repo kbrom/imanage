@@ -4,7 +4,7 @@
 <h4>Project Management Just Got Easier!</h4>
 {{Form::open('login','POST',array('class'=>'form-signin'))}}
 @if (Session::has('login_errors'))
-<span class="alert alert-error">Username or password incorrect.</span>
+    <span class="alert alert-error" data-dismiss="alert">Username or password incorrect!</span>
 @endif
  {{Form::token()}}
 <h2 class="form-signin-heading">Please Sign in</h2>
