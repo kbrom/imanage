@@ -34,7 +34,7 @@
       <div class="row">
         <div class="span2">
 
-          <img src="" alt="project Thumb">
+    {{HTML::image($thumb, 'user thumb')}}
         </div>
       <div class="span6">
           <div class="span3"><strong>Title: </strong><em class="text-info">{{Str::title($title)}}</em></div>

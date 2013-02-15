@@ -42,7 +42,9 @@
   <div class="row">
     <div class="span2">
 
-      <img src="img/malaptop.jpg" alt="Employee Thumb"></div>
+    {{HTML::image($thumb, 'user thumb')}}
+
+      </div>
 
     <div class="span6">
       <div class="span3"> <strong>Name:</strong> <em class="text-info">{{$fname}} {{$lname}}</em>

@@ -12,7 +12,10 @@ class Projects_Controller extends Base_Controller {
         //$user->projects()->attach($project_id);
                //dd($projects);
 
-       $projects=Project::where_sup_id($user_id)->get();
+       $projects=User::find($user_id)->projects()->get();
+       $total=count($projects);
+       $per_page=3;
+             $projects = Paginator::make($projects, $total, $per_page);
             return View::make('project.index')->with('projects',$projects);
     }    
 
@@ -34,6 +37,7 @@ class Projects_Controller extends Base_Controller {
             'status'=>'On Progress'
             );
         $project=Project::create($input);
+        $project->users()->attach($sup_id);
         if($project)
         {
             Redirect::to_route('projects');

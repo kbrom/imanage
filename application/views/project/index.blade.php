@@ -24,7 +24,7 @@
 
 	</div>
 	<div class="row">
-	@foreach ($projects as $project) 
+	@foreach ($projects->results as $project) 
 		
 			<div class="span2">
 
@@ -46,7 +46,7 @@
 							<a tabindex="-1" href="#">Update</a>
 
 					<ul class="dropdown-menu">
-						<li><a tabindex="-1" href="jobs/new">Add Task</a></li>
+						<li><a tabindex="-1" href="jobs/new/{{$project->id}}">Add Task</a></li>
 						<li><a tabindex="-1" href="users/new">Add Member</a></li>
 						<li><a tabindex="-1" href="projects/{{$project->id}}/edit">Edit</a></li>
 					</ul>
@@ -69,6 +69,7 @@
 			</div>
 		</div>
 @endforeach
+{{$projects->links();}}
 	</div>
 	</div>
 	@endsection

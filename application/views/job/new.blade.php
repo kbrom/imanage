@@ -23,6 +23,7 @@
 
 			{{Form::open('jobs', 'POST', array('class' => 'form-horizontal'))}}
 			{{Form::token()}}
+			<input type="hidden" name="id" value="{{$id}}">
 			<div class="control-group">
 				<label class="control-label">Title</label>
 				<div class="controls">
@@ -42,7 +43,11 @@
 					<textarea rows="5" columns="8" id="desc" name="desc" required="required"></textarea>
 					</div>
 			</div>
-
+<div class="control-group">
+				<label class="control-label">Assign to</label>
+				<div class="controls">
+					<input type="email" class="input-large" id="ass" name="ass"required="required"></div>
+			</div>
 			<div class="control-group">
 				<label class="control-label">Start Date</label>
 				<div class="controls">

@@ -6,11 +6,11 @@ class Users_Controller extends Base_Controller {
 
     public function get_index()
     {
-        //dd(User::find(2)->roles()->get());
-        //dd(Role::all());
-        $email="abel.adam6@gmail.com";
-       // dd(User::where('email', '=', $email)->first());
-    //User::find(1)->roles()->attach(2);
+        $users=User::all();
+         $total=count($users);
+        $per_page=3;
+        $users = Paginator::make($users, $total, $per_page);
+        return View::make('user.index')->with('users',$users);
 
     }    
 
@@ -18,6 +18,18 @@ class Users_Controller extends Base_Controller {
     {
         return View::make('user.login');
     }  
+
+    public function get_logout()
+    {
+        if (Auth::check()) {
+            Auth::logout();
+            return Redirect::to_route('login');
+        }
+        else
+        {
+            return Redirect::to_route('home');
+        }
+    }
 
     public function post_login()
     {
@@ -27,7 +39,7 @@ class Users_Controller extends Base_Controller {
             );
         if(Auth::attempt($user))
         {
-            return Redirect::to_route('projects')
+            return Redirect::to_route('home')
                                 ->with('title','projects');
 ;
         }
@@ -69,6 +81,7 @@ class Users_Controller extends Base_Controller {
 
     public function get_new()
     {
+        
         return View::make('user.new');
     }    
 

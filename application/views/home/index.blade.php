@@ -21,7 +21,7 @@
 		<div class="span5">
 			<ul class="nav nav-pills">
 				<li class="active">
-					<a href="/projects">Projets</a>
+					<a href="/projects">Projects</a>
 				</li>
 
 				<li>
@@ -29,14 +29,14 @@
 				</li>
 
 				<li>
-					<a href="projects.html">Tasks</a>
+					<a href="/jobs">Jobs</a>
 				</li>
 				<li>
 					<a href="#">Files</a>
 				</li>
 				@if(Auth::check())
 				<li>
-					<a href="{{Auth::logout();}}">Logout</a>
+					{{HTML::link_to_route('logout','Logout')}}
 				</li>
 				@endif
 			</ul>

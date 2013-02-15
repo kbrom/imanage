@@ -40,7 +40,8 @@ Route::delete('users/(:any)', 'users@destroy');
 
 // job Resource
 Route::get('jobs', array('as' => 'jobs', 'uses' => 'jobs@index'));
-Route::get('jobs/new', array('as'=>'new_job', 'uses'=>'jobs@new'));
+Route::get('jobs/new/(:num)', array('as'=>'new_job', 'uses'=>'jobs@new'));
+Route::get('jobs/(:any)', array('as' => 'job', 'uses' => 'jobs@show'));
 Route::get('jobs/(:any)/edit', array('as' => 'edit_job', 'uses' => 'jobs@edit'));
 Route::post('jobs', 'jobs@create');
 Route::put('jobs/(:any)', 'jobs@update');
@@ -55,6 +56,8 @@ Route::post('register', array('before'=>'csrf', 'uses' => 'users@create'));
 Route::get('login', array('as' => 'login', 'uses' => 'users@login'));
 Route::post('login', array('before'=>'csrf','uses'=>'users@login'));
 
+//Logout
+Route::get('logout', array('as' => 'logout', 'uses' => 'users@logout'));
 
 
 // project Resource
@@ -73,8 +76,9 @@ Route::get('/',array('as'=>'home', 'uses'=>'home@index'));
 
 //Authenticate
 Route::filter('pattern: users/*', 'auth');
-Route::filter('pattern: /*', 'auth');
 Route::filter('pattern: projects/*', 'auth');
+Route::filter('pattern: jobs/*', 'auth');
+Route::filter('pattern: /*', 'auth');
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers
