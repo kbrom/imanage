@@ -30,7 +30,12 @@
       </div>
   <hr>
   <!-- Example row of columns -->
+<?php 
+  $user=User::find($pm_id)->
+    first();
+  $user_email=$user->email;
 
+?>
       <div class="row">
         <div class="span2">
 
@@ -38,7 +43,7 @@
         </div>
       <div class="span6">
           <div class="span3"><strong>Title: </strong><em class="text-info">{{Str::title($title)}}</em></div>
-          <div class="span3"><strong>Project Manager: </strong><em class="text-info">{{$pm_id}}</em></div>
+          <div class="span3"><strong>Project Manager: </strong><em class="text-info">{{$user_email}}</em></div>
           <div class="span3"><strong>Start Date: </strong><em class="text-info">{{Str::limit($startdate,10)}}</em></div>
           <div class="span3"><strong>End Date: </strong><em class="text-info">{{Str::limit($enddate,10)}}</em></div>
           <div class="span3"><strong>Status: </strong><em class="text-info">{{Str::title($status)}}</em></div>

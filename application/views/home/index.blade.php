@@ -25,10 +25,6 @@
 				</li>
 
 				<li>
-					<a href="#">People</a>
-				</li>
-
-				<li>
 					<a href="/jobs">Jobs</a>
 				</li>
 				<li>

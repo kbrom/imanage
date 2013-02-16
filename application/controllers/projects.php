@@ -50,9 +50,11 @@ class Projects_Controller extends Base_Controller {
         return View::make('project.show' , $project->to_array());
     }    
 
-	public function get_edit()
+	public function get_edit($id)
     {
-
+        $project=Project::find($id);
+        if(!$project) return Redirect::to_route('new_project');
+        return View::make('project.edit' , $project->to_array());
     }    
 
 	public function get_new()
@@ -62,7 +64,20 @@ class Projects_Controller extends Base_Controller {
 
 	public function put_update()
     {
-
+        $id=Input::get('id');
+        $pm_email=Input::get('projectmanager');
+        $pm=User::where_email($pm_email)->first();
+        $pm_id=$pm->id;
+         $input=array(
+            'title'=>Input::get('title'),
+            'shortdesc'=>Input::get('shortdesc'),
+            'desc'=>Input::get('desc'),
+            'pm_id'=>$pm_id,
+            'startdate'=>Input::get('sdate'),
+            'enddate'=>Input::get('edate'),
+            );
+        Project::update($id,$input);
+        return Redirect::to_route('project', $id);
     }    
 
 	public function delete_destroy()

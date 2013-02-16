@@ -35,7 +35,7 @@ Route::get('users', array('as' => 'users', 'before'=>'auth','uses' => 'users@ind
 Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
 Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@create'));
-Route::put('users/(:any)', 'users@update');
+Route::put('users/update', 'users@update');
 Route::delete('users/(:any)', 'users@destroy');
 
 // job Resource
@@ -44,7 +44,7 @@ Route::get('jobs/new/(:num)', array('as'=>'new_job', 'uses'=>'jobs@new'));
 Route::get('jobs/(:any)', array('as' => 'job', 'uses' => 'jobs@show'));
 Route::get('jobs/(:any)/edit', array('as' => 'edit_job', 'uses' => 'jobs@edit'));
 Route::post('jobs', 'jobs@create');
-Route::put('jobs/(:any)', 'jobs@update');
+Route::put('jobs/update', 'jobs@update');
 Route::delete('jobs/(:any)', 'jobs@destroy');
 
 
@@ -66,7 +66,7 @@ Route::get('projects/(:any)', array('as' => 'project', 'uses' => 'projects@show'
 Route::get('projects/new', array('as' => 'new_project', 'uses' => 'projects@new'));
 Route::get('projects/(:any)/edit', array('as' => 'edit_project', 'uses' => 'projects@edit'));
 Route::post('projects', 'projects@create');
-Route::put('projects/(:any)', 'projects@update');
+Route::put('projects/update', 'projects@update');
 Route::delete('projects/(:any)', 'projects@destroy');
 
 
