@@ -1,6 +1,6 @@
 @layout('master')
 @section('content')
-<div class="row">
+<div class="row header">
 	<div class="span3">
 		<h1>iManage</h1>
 		<h4>Project Management Just Got Easier!</h4>

@@ -11,6 +11,8 @@
 </head>
 <body>
   <div class="container">
+    <div class="toolbar"><a href="/users/{{Auth::user()->id}}">{{Auth::user()->fname}}</a></div>
+
     @yield('content')
     <hr>
 

@@ -20,7 +20,7 @@
 
 	<!-- Example row of columns -->
 	<div class="row">
-		<div class="span8">Projects</div>
+		<div class="span8">Users</div>
 
 	</div>
 	<div class="row">
@@ -53,7 +53,8 @@
 		</div>
 	</div>
 	@endforeach
-{{$users->links();}}
 </div>
+{{$users->links();}}
+
 </div>
 @endsection

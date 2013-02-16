@@ -23,15 +23,20 @@
         <li class="active">
           <a href="/users">People</a>
         </li>
+         <li>
+          <a href="/projects">Projects</a>
+        </li>
         <li>
           <a href="/jobs">Tasks</a>
         </li>
         <li>
-          <a href="#">Files</a>
-        </li>
-        <li>
           <a href="#">Discussions</a>
         </li>
+        @if(Auth::check())
+        <li>
+          {{HTML::link_to_route('logout','Logout')}}
+        </li>
+        @endif
       </ul>
     </div>
 
@@ -45,7 +50,7 @@
     {{HTML::image($thumb, 'user thumb')}}
 
       </div>
-
+<input type="hidden" name="id" value="{{$id}}">
     <div class="span6">
       <div class="span3"> <strong>Name:</strong> <em class="text-info">{{$fname}} {{$lname}}</em>
       </div>
