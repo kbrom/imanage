@@ -34,7 +34,7 @@
 Route::get('users', array('as' => 'users', 'before'=>'auth','uses' => 'users@index'));
 Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
-Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@create'));
+Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
 Route::put('users/update', 'users@update');
 Route::delete('users/(:any)', 'users@destroy');
 
@@ -67,7 +67,7 @@ Route::get('projects/new', array('as' => 'new_project', 'uses' => 'projects@new'
 Route::get('projects/(:any)/edit', array('as' => 'edit_project', 'uses' => 'projects@edit'));
 Route::post('projects', 'projects@create');
 Route::put('projects/update', 'projects@update');
-Route::delete('projects/(:any)', 'projects@destroy');
+Route::get('projects/(:any)/delete', 'projects@destroy');
 
 
 //Home Routes

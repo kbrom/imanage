@@ -60,7 +60,7 @@
 						</li>
 						
 						<li>
-							<a data-target="#" href="#"  tabindex="-1">Delete</a>
+							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
 						</li>
 
 					</ul>

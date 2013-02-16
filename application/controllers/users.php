@@ -74,9 +74,11 @@ class Users_Controller extends Base_Controller {
         return View::make('user.show' , $user->to_array());
     }    
 
-    public function get_edit()
+    public function get_edit($id)
     {
-        return 'Editing';
+        $user=User::find($id);
+        if(!$user) return Redirect::to_route('new_user');
+        return View::make('user.edit' , $user->to_array());
     }    
 
     public function get_new()

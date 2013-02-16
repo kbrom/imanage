@@ -80,9 +80,10 @@ class Projects_Controller extends Base_Controller {
         return Redirect::to_route('project', $id);
     }    
 
-	public function delete_destroy()
-    {
-
+	public function get_destroy($id)
+    {   
+       Project::find($id)->delete();
+       return Redirect::to_route('projects');
     }
 
 }
