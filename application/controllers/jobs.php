@@ -7,10 +7,8 @@ class Jobs_Controller extends Base_Controller {
 	public function get_index()
     {
        $user_id=Auth::user()->id;
-       $jobs=User::find($user_id)->jobs()->get();
-       $total=count($jobs);
-       $per_page=3;
-       $jobs=Paginator::make($jobs,$total,$per_page);
+       $projects=User::find($user_id)->projects()->paginate(3);
+       $jobs=User::find($user_id)->jobs()->paginate(3);
        return View::make('job.index')->with('jobs',$jobs);
     }    
 

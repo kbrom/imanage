@@ -34,14 +34,22 @@
 			<div class="dropdown">
 				<div class="btn-group">
 					<a class="btn" href="projects/{{$project->id}}">View &raquo;</a>
-					@if($project->sup_id==Auth::user()->id)
+					@if($project->pm_id==Auth::user()->id)
 
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-					@if($project->pm_id==Auth::user()->id)
+					@if($project->sup_id==Auth::user()->id)
+					<li>
+							<a data-target="#" href="#">Reassign</a>
+						</li>
+						
+						<li>
+							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
+						</li>
+						@endif
 						<li class="dropdown-submenu">
 							<a tabindex="-1" href="#">Update</a>
 
@@ -54,14 +62,6 @@
 						<li>
 							<a data-target="#" href="#">Close</a>
 						</li>
-					@endif
-						<li>
-							<a data-target="#" href="#">Reassign</a>
-						</li>
-						
-						<li>
-							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
-						</li>
 
 					</ul>
 					@endif
@@ -69,7 +69,8 @@
 			</div>
 		</div>
 @endforeach
-{{$projects->links();}}
 	</div>
+	{{$projects->links();}}
+
 	</div>
 	@endsection

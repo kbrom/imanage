@@ -7,15 +7,7 @@ class Projects_Controller extends Base_Controller {
 	public function get_index()
     {
         $user_id=Auth::user()->id;
-        //$project_id=1;
-        //$user=User::find($user_id);
-        //$user->projects()->attach($project_id);
-               //dd($projects);
-
-       $projects=User::find($user_id)->projects()->get();
-       $total=count($projects);
-       $per_page=3;
-             $projects = Paginator::make($projects, $total, $per_page);
+       $projects=User::find($user_id)->projects()->paginate(3);
             return View::make('project.index')->with('projects',$projects);
     }    
 
@@ -38,6 +30,7 @@ class Projects_Controller extends Base_Controller {
             );
         $project=Project::create($input);
         $project->users()->attach($sup_id);
+        $project->users()->attach($pm_id);
         if($project)
         {
             Redirect::to_route('projects');

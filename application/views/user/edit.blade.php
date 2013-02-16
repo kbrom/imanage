@@ -23,6 +23,8 @@
 
 			{{Form::open('users/update', 'PUT', array('class' => 'form-horizontal'))}}
 			{{Form::token()}}
+					<input type="hidden" value="{{$id}}" name="id">
+
 			<div class="control-group">
 				<label class="control-label">First Name</label>
 				<div class="controls">

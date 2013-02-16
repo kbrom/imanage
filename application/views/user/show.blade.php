@@ -21,10 +21,10 @@
     <div class="span5">
       <ul class="nav nav-pills">
         <li class="active">
-          <a href="#">People</a>
+          <a href="/users">People</a>
         </li>
         <li>
-          <a href="projects.html">Tasks</a>
+          <a href="/jobs">Tasks</a>
         </li>
         <li>
           <a href="#">Files</a>
@@ -52,8 +52,12 @@
       <div class="span3"> <strong>Skill:</strong> <em class="text-info">{{$skills}}</em>
       </div>
       <div class="span3">
-        <strong>Contact:</strong>
-        <em class="text-info">{{$email}},{{$phone}}</em>
+        <strong>Email:</strong>
+        <em class="text-info">{{$email}}</em>
+      </div>
+      <div class="span3">
+        <strong>Phone:</strong>
+        <em class="text-info">{{$phone}}</em>
       </div>
       <div class="span3">
         <strong>Working On:</strong>

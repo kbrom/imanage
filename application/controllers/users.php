@@ -6,10 +6,9 @@ class Users_Controller extends Base_Controller {
 
     public function get_index()
     {
-        $users=User::all();
+        $user_id=Auth::user()->sup_id;
+        $users=User::find($user_id)->paginate(3);
          $total=count($users);
-        $per_page=3;
-        $users = Paginator::make($users, $total, $per_page);
         return View::make('user.index')->with('users',$users);
 
     }    
@@ -39,7 +38,8 @@ class Users_Controller extends Base_Controller {
             );
         if(Auth::attempt($user))
         {
-            return Redirect::to_route('home')
+            $id=Auth::user()->id;
+            return Redirect::to_route('user',$id)
                                 ->with('title','projects');
 ;
         }
@@ -54,16 +54,29 @@ class Users_Controller extends Base_Controller {
     {
         // Add Validation Here
         $role_id=Input::get('role');
+        if (Auth::check()) {
+            $sup_id=Auth::user()->id;
+            $input=array(
+            'fname'=>Input::get('fname'),
+            'lname'=>Input::get('lname'),
+            'email'=>Input::get('email'),
+            'sup_id'=>$sup_id,
+            'password'=>Hash::Make(Input::get('pass')),
+            'phone'=>Input::get('phone'),
+            'skills'=>Input::get('skills')
+            );
+        }
         $input=array(
             'fname'=>Input::get('fname'),
             'lname'=>Input::get('lname'),
             'email'=>Input::get('email'),
             'password'=>Hash::Make(Input::get('pass')),
             'phone'=>Input::get('phone'),
-            'skills'=>Input::get('skills'),
+            'skills'=>Input::get('skills')
             );
         $user=User::create($input);
         $user->roles()->attach($role_id);
+        return Redirect::to_route('user',$user->id);
         //            
 
     }    
@@ -89,12 +102,22 @@ class Users_Controller extends Base_Controller {
 
     public function put_update()
     {
-
+        $id=Input::get('id');
+        $input=array(
+            'fname'=>Input::get('fname'),
+            'lname'=>Input::get('lname'),
+            'phone'=>Input::get('phone'),
+            'skills'=>Input::get('skills')
+            );
+        User::update($id,$input);
+        return Redirect::to_route('user', $id);
     }    
 
-    public function delete_destroy()
-    {
-
+   public function get_destroy($id)
+    {   
+       User::find($id)->delete();
+       return Redirect::to_route('users');
     }
+
 
 }
