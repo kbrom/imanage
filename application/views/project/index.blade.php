@@ -55,7 +55,7 @@
 
 					<ul class="dropdown-menu">
 						<li><a tabindex="-1" href="jobs/new/{{$project->id}}">Add Task</a></li>
-						<li><a tabindex="-1" href="users/new">Add Member</a></li>
+						<li><a tabindex="-1" href="users/new/{{$project->id}}">Add Member</a></li>
 						<li><a tabindex="-1" href="projects/{{$project->id}}/edit">Edit</a></li>
 					</ul>
 						</li>

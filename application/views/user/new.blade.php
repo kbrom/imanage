@@ -23,6 +23,9 @@
 
 			{{Form::open('register', 'POST', array('class' => 'form-horizontal'))}}
 			{{Form::token()}}
+			     <?php   if(Request::referrer()=='http://imanage.dev/projects')?>
+						<input type="hidden" name="id" value="{{$id}}">
+		
 			<div class="control-group">
 				<label class="control-label">First Name</label>
 				<div class="controls">

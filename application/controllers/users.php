@@ -76,6 +76,12 @@ class Users_Controller extends Base_Controller {
             );
         $user=User::create($input);
         $user->roles()->attach($role_id);
+        //After Adding the User Attach him to a project
+        if (Input::get('id')) {
+            $p_id=Input::get('id');
+            $user->projects()->attach($p_id);
+            return Redirect::to_route('project',$p_id);
+        }
         return Redirect::to_route('user',$user->id);
         //            
 
@@ -96,8 +102,8 @@ class Users_Controller extends Base_Controller {
 
     public function get_new()
     {
-        
-        return View::make('user.new');
+        $id=$segment = URI::segment(3);
+        return View::make('user.new')->with('id',$id);
     }    
 
     public function put_update()
