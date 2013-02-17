@@ -66,6 +66,7 @@ Route::get('projects', array('as' => 'projects','before'=>'auth', 'uses' => 'pro
 Route::get('projects/(:any)', array('as' => 'project', 'uses' => 'projects@show'));
 Route::get('projects/new', array('as' => 'new_project', 'uses' => 'projects@new'));
 Route::get('projects/(:any)/edit', array('as' => 'edit_project', 'uses' => 'projects@edit'));
+Route::get('projects/(:num)/members', array('as' => 'project_members', 'uses' => 'projects@members'));
 Route::post('projects', 'projects@create');
 Route::put('projects/update', 'projects@update');
 Route::get('projects/(:any)/delete', 'projects@destroy');

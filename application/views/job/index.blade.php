@@ -61,6 +61,12 @@
 			</div>
 		</div>
 		@endforeach
+		<div class="span2">
+
+          <h4>Add New Task</h4>
+            <p><a href="/jobs/new"class="btn btn-success btn-large" type="button"><i class="icon-plus-sign"> </i>  add</a></p>
+          
+        </div>
 {{$jobs->links();}}
 	</div>
 </div>

@@ -14,6 +14,16 @@ class Projects_Controller extends Base_Controller {
             return View::make('project.index')->with('projects',$projects);
     }    
 
+    //Display members of a project
+
+    public function get_members($id)
+    {
+        $members=Project::find($id)->users()->paginate(3);
+        return View::make('user.index')
+            ->with('users',$members);
+    }
+
+
 	public function post_create()
     {
         $pm_email=Input::get('projectmanager');

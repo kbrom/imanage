@@ -1,6 +1,6 @@
 @layout('master')
 @section('content')
-<div class="row header">
+<div class="row">
 	<div class="span3">
 		<h1>iManage</h1>
 		<h4>Project Management Just Got Easier!</h4>
@@ -24,9 +24,8 @@
 
 	</div>
 	<div class="row">
-	@foreach ($projects->results as $project) 
-		
-			<div class="span2">
+		@foreach ($projects->results as $project)
+		<div class="span2">
 
 			<h3>{{Str::title($project->title)}}</h3>
 			<h4>{{Project::find($project->id)->jobs()->count();}} Tasks</h4>
@@ -35,17 +34,16 @@
 				<div class="btn-group">
 					<a class="btn" href="projects/{{$project->id}}">View &raquo;</a>
 					@if($project->pm_id==Auth::user()->id)
-
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-					@if($project->sup_id==Auth::user()->id)
-					<li>
+						@if($project->sup_id==Auth::user()->id)
+						<li>
 							<a data-target="#" href="#">Reassign</a>
 						</li>
-						
+
 						<li>
 							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
 						</li>
@@ -53,11 +51,17 @@
 						<li class="dropdown-submenu">
 							<a tabindex="-1" href="#">Update</a>
 
-					<ul class="dropdown-menu">
-						<li><a tabindex="-1" href="jobs/new/{{$project->id}}">Add Task</a></li>
-						<li><a tabindex="-1" href="users/new/{{$project->id}}">Add Member</a></li>
-						<li><a tabindex="-1" href="projects/{{$project->id}}/edit">Edit</a></li>
-					</ul>
+							<ul class="dropdown-menu">
+								<li>
+									<a tabindex="-1" href="jobs/new/{{$project->id}}">Add Task</a>
+								</li>
+								<li>
+									<a tabindex="-1" href="users/new/{{$project->id}}">Add Member</a>
+								</li>
+								<li>
+									<a tabindex="-1" href="projects/{{$project->id}}/edit">Edit</a>
+								</li>
+							</ul>
 						</li>
 						<li>
 							<a data-target="#" href="#">Close</a>
@@ -68,9 +72,17 @@
 				</div>
 			</div>
 		</div>
-@endforeach
+		@endforeach
+		<div class="span2">
+
+			<h4>Add New Project</h4>
+			<p>
+				<a href="/projects/new"class="btn btn-success btn-large" type="button"> <i class="icon-plus-sign"></i>
+					Add
+				</a>
+			</p>
+		</div>
 	</div>
 	{{$projects->links();}}
-
-	</div>
-	@endsection
+</div>
+@endsection

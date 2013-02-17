@@ -32,7 +32,7 @@
 			<h4>{{User::find($user->id)->projects()->count();}} Projects</h4>
 			<div class="dropdown">
 				<div class="btn-group">
-					<a class="btn" href="users/{{$user->id}}">View &raquo;</a>
+					<a class="btn" href="/users/{{$user->id}}">View &raquo;</a>
 
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action

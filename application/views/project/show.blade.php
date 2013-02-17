@@ -21,16 +21,16 @@
     <div class="span5">
       <ul class="nav nav-pills">
         <li>
-          <a href="#">People</a>
+          <a href="/projects/{{$id}}/members">People</a>
         </li>
         <li>
-          <a href="#">Task</a>
+          <a href="">Task</a>
         </li>
         <li>
-          <a href="#">Files</a>
+          <a href="">Files</a>
         </li>
         <li>
-          <a href="#">Discussions</a>
+          <a href="">Discussions</a>
         </li>
       </ul>
     </div>
@@ -53,7 +53,7 @@
       <div class="span3"> <strong>Title:</strong> <em class="text-info">{{Str::title($title)}}</em>
       </div>
       <div class="span3">
-        <strong>Project Manager:</strong> <em class="text-info">{{$pm_email}}</em>
+        <strong>Manager:</strong> <em class="text-info">{{$pm_email}}</em>
       </div>
       <div class="span3">
         <strong>Start Date:</strong>

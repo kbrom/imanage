@@ -11,7 +11,10 @@
 </head>
 <body>
   <div class="container">
-    <div class="toolbar"><a href="/users/{{Auth::user()->id}}">{{Auth::user()->fname}}</a></div>
+  @if (Auth::check()) 
+        <div class="toolbar"><a href="/users/{{Auth::user()->id}}">{{Auth::user()->fname}}</a></div>
+
+  @endif
 
     @yield('content')
     <hr>
