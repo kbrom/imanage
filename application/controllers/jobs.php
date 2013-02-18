@@ -9,7 +9,9 @@ class Jobs_Controller extends Base_Controller {
        $user_id=Auth::user()->id;
        $projects=User::find($user_id)->projects()->paginate(3);
        $jobs=User::find($user_id)->jobs()->paginate(3);
-       return View::make('job.index')->with('jobs',$jobs);
+
+         return View::make('job.index')->with('jobs',$jobs);
+    
     }    
 
 	public function post_create()

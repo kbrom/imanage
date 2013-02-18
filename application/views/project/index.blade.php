@@ -19,10 +19,12 @@
 <div class="hero-unit">
 
 	<!-- Example row of columns -->
-	<div class="row">
-		<div class="span8">Projects</div>
+	@if (!count($projects->results))
+	<div class='row'>
+		<div class='span8'>No Projects</div>
 
 	</div>
+	@endif
 	<div class="row">
 		@foreach ($projects->results as $project)
 		<div class="span2">
@@ -73,6 +75,12 @@
 			</div>
 		</div>
 		@endforeach
+		<?php
+			$roles = User::find(Auth::user()->
+		id)->roles()->get();?>
+			@foreach($roles as $role)
+			
+				@if($role->id==1)
 		<div class="span2">
 
 			<h4>Add New Project</h4>
@@ -82,6 +90,9 @@
 				</a>
 			</p>
 		</div>
+		@endif
+
+			@endforeach
 	</div>
 	{{$projects->links();}}
 </div>

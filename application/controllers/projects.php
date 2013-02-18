@@ -6,11 +6,8 @@ class Projects_Controller extends Base_Controller {
 
 	public function get_index()
     {
-        $id=Input::get('id');
-        if($id)
-            $user_id=$id;
         $user_id=Auth::user()->id;
-       $projects=User::find($user_id)->projects()->paginate(3);
+       $projects=Project::where_sup_id($user_id)->paginate(3);
             return View::make('project.index')->with('projects',$projects);
     }    
 

@@ -19,20 +19,22 @@
 <div class="hero-unit">
 
 	<!-- Example row of columns -->
-	<div class="row">
-		<div class="span8">Users</div>
+	@if (!count($users->results))
+		<div class='row'>
+		<div class='span8'>No Users</div>
 
 	</div>
+	@endif
 	<div class="row">
-		@foreach ($users->results as $user)
+			@foreach ($users->results as $user)
 		<div class="span2">
 
-			<h3>{{Str::title($user->fname)}} {{Str:: title($user->lname)}}</h3>
+			<h5>{{Str::title($user->fname)}} {{Str:: title($user->lname)}}</h5>
 			<h4>{{User::find($user->id)->jobs()->count();}} Tasks</h4>
 			<h4>{{User::find($user->id)->projects()->count();}} Projects</h4>
 			<div class="dropdown">
 				<div class="btn-group">
-					<a class="btn" href="/users/{{$user->id}}">View &raquo;</a>
+					<a class="btn" href="users/{{$user->id}}">View &raquo;</a>
 
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
@@ -53,6 +55,23 @@
 		</div>
 	</div>
 	@endforeach
+	<?php
+			$roles = User::find(Auth::user()->id)->roles()->get();?>
+			@foreach($roles as $role)
+			
+				@if($role->id==1)
+		<div class="span2">
+
+			<h4>Add New User</h4>
+			<p>
+				<a href="/users/new"class="btn btn-success btn-large" type="button"> <i class="icon-plus-sign"></i>
+					Add
+				</a>
+			</p>
+		</div>
+		@endif
+					@endforeach
+
 </div>
 {{$users->links();}}
 

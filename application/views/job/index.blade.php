@@ -19,11 +19,14 @@
 <div class="hero-unit">
 
 	<!-- Example row of columns -->
-	<div class="row">
-		<div class="span8">Tasks</div>
+	@if (!count($jobs->results))
+		<div class='row'>
+		<div class='span8'>No Tasks</div>
 
 	</div>
+	@endif
 	<div class="row">
+	
 		@foreach ($jobs->results as $job)
 		<?php $project=Job::find($job->id)->project;
 		$pm_id=$project->pm_id;?>
@@ -61,13 +64,9 @@
 			</div>
 		</div>
 		@endforeach
-		<div class="span2">
-
-          <h4>Add New Task</h4>
-            <p><a href="/jobs/new"class="btn btn-success btn-large" type="button"><i class="icon-plus-sign"> </i>  add</a></p>
-          
-        </div>
+		
 {{$jobs->links();}}
+
 	</div>
 </div>
 @endsection

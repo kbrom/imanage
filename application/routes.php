@@ -32,6 +32,7 @@
 |
 */// user Resource
 Route::get('users', array('as' => 'users', 'before'=>'auth','uses' => 'users@index'));
+Route::get('/users/(:num)/projects', array('as' => 'user_projects', 'uses' => 'users@projects'));
 Route::get('users/new/(:num)', array('as'=>'add_new_user', 'uses'=>'users@new'));
 Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));

@@ -20,11 +20,18 @@
   <div class="row">
     <div class="span5">
       <ul class="nav nav-pills">
+      <?php
+      $roles = User::find($id)->roles()->get();?>
+      @foreach($roles as $role)
+      
+        @if($role->id==1)
         <li class="active">
           <a href="/users">People</a>
         </li>
+        @endif
+        @endforeach
          <li>
-          <a href="/projects">Projects</a>
+          <a href="/users/{{$id}}/projects">Projects</a>
         </li>
         <li>
           <a href="/jobs">Tasks</a>
@@ -32,7 +39,7 @@
         <li>
           <a href="#">Discussions</a>
         </li>
-        @if(Auth::check())
+        @if(Auth::check() && $id==Auth::user()->id)
         <li>
           {{HTML::link_to_route('logout','Logout')}}
         </li>

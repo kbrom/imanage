@@ -6,12 +6,18 @@ class Users_Controller extends Base_Controller {
 
     public function get_index()
     {
-        $user_id=Auth::user()->sup_id;
-        $users=User::find($user_id)->paginate(3);
-         $total=count($users);
+        $sup_id=Auth::user()->id;
+        $users=User::where_sup_id($sup_id)->paginate(3);
+        $total=count($users);
         return View::make('user.index')->with('users',$users);
-
     }    
+
+    public function get_projects($id)
+    {
+        $projects=User::find($id)->projects()->paginate(3);
+        return View::make('project.index')
+            ->with('projects',$projects);
+    }
 
     public function get_login()
     {
@@ -55,6 +61,7 @@ class Users_Controller extends Base_Controller {
         // Add Validation Here
         $role_id=Input::get('role');
         if (Auth::check()) {
+
             $sup_id=Auth::user()->id;
             $input=array(
             'fname'=>Input::get('fname'),
@@ -66,14 +73,6 @@ class Users_Controller extends Base_Controller {
             'skills'=>Input::get('skills')
             );
         }
-        $input=array(
-            'fname'=>Input::get('fname'),
-            'lname'=>Input::get('lname'),
-            'email'=>Input::get('email'),
-            'password'=>Hash::Make(Input::get('pass')),
-            'phone'=>Input::get('phone'),
-            'skills'=>Input::get('skills')
-            );
         $user=User::create($input);
         $user->roles()->attach($role_id);
         //After Adding the User Attach him to a project
