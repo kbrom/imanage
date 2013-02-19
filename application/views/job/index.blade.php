@@ -67,12 +67,13 @@
 			<div class="dropdown">
 				<div class="btn-group">
 					<a class="btn" href="/jobs/{{$job->id}}">View &raquo;</a>
-					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
+					
+						@if($job->user_id==Auth::user()->id && $job->status!='Finished' || $pm_id==Auth::user()->id)
+						<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						@if($job->user_id==Auth::user()->id)
 							<li>
 							<a data-target="#" href="/jobs/{{$job->id}}/close">Close</a>
 						</li>

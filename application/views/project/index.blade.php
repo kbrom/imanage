@@ -61,8 +61,17 @@
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						@if($project->pm_id==Auth::user()->id)
-													<li class="dropdown-submenu">
+					<li>
+							<a data-target="#" href="projects/{{$project->id}}/reassign">Reassign</a>
+						</li>
+
+						<li>
+							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
+						</li>			
+					@endif
+
+					@if($project->pm_id==Auth::user()->id)
+							<li class="dropdown-submenu">
 							<a tabindex="-1" href="#">Update</a>
 
 							<ul class="dropdown-menu">
@@ -79,18 +88,12 @@
 						</li>
 						<li>
 							<a data-target="#" href="projects/{{$project->id}}/close">Close</a>
-						</li>						
+						</li>
+						
+
+					</ul>		
 						@endif
-						<li>
-							<a data-target="#" href="projects/{{$project->id}}/reassign">Reassign</a>
-						</li>
-
-						<li>
-							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
-						</li>
-
-					</ul>
-					@endif
+													
 				</div>
 			</div>
 		</div>

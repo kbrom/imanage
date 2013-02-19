@@ -55,11 +55,14 @@ class Projects_Controller extends Base_Controller {
             );
         $project=Project::create($input);
 
-        if ($sup_id!=$pm_id) {
+        if ($sup_id==$pm_id) {
+                $project->users()->attach($sup_id);
+       }
+       else
+       {
             $project->users()->attach($sup_id);
-        $project->users()->attach($pm_id);
-        }
-        $project->users()->attach($sup_id);
+            $project->users()->attach($pm_id);
+       }
         if($project)
         {
            return Redirect::to_route('project',$project->id);

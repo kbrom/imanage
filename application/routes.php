@@ -95,10 +95,10 @@ Route::get('/',array('as'=>'home', 'uses'=>'home@index'));
 
 
 //Authenticate
-Route::filter('pattern: users/*', 'auth');
+//Route::filter('pattern: users/*', 'auth');
 Route::filter('pattern: projects/*', 'auth');
 Route::filter('pattern: jobs/*', 'auth');
-Route::filter('pattern: /*', 'auth');
+//Route::filter('pattern: /*', 'auth');
 /*
 |--------------------------------------------------------------------------
 | Application 404 & 500 Error Handlers

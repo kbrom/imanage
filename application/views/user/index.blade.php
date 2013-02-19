@@ -20,12 +20,17 @@
 
 	<!-- Example row of columns -->
 	<?php
-		$user_id=URI::segment(2);
-		if(isset($user_id))
+		$p_id=URI::segment(2);
+		$project_id=URI::segment(2);
+		$item=URI::segment(1);
+		if(isset($user_id) && $item=='projects')
 		{
-			$user=User::find($user_id);
-			$user_fname=$user->fname;
-			$msg=$user_fname.' has no users!';
+			$project=Project::find($p_id);
+			$msg='This project has no members!';
+		}
+elseif (isset($project_id) && $item=='projects') 
+		{
+			$msg='This Project has no members';
 		}
 		else
 		{
@@ -49,11 +54,12 @@
 		<div class="span2">
 
 			<h5>{{Str::title($user->fname)}} {{Str:: title($user->lname)}}</h5>
-			<h4>{{User::find($user->id)->jobs()->count();}} Tasks</h4>
+			<h4>{{User::find($user->id)->jobs()->where_status('On Progress')->count();}} Tasks</h4>
 			<h4>{{User::find($user->id)->projects()->count();}} Projects</h4>
 			<div class="dropdown">
 				<div class="btn-group">
 					<a class="btn" href="users/{{$user->id}}">View &raquo;</a>
+										@if($user->sup_id==Auth::user()->id)
 
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
@@ -70,6 +76,7 @@
 					</li>
 
 				</ul>
+				@endif
 			</div>
 		</div>
 	</div>

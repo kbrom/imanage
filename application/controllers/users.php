@@ -6,9 +6,16 @@ class Users_Controller extends Base_Controller {
 
     public function get_index()
     {
-        $sup_id=Auth::user()->id;
+        if (Auth::check()) {
+            $sup_id=Auth::user()->id;
         $users=User::where_sup_id($sup_id)->paginate(2);
         return View::make('user.index')->with('users',$users);
+        }
+        else
+        {
+            return Redirect::to_route('login');
+        }
+        
     }    
 
     public function get_projects($id)
@@ -20,7 +27,7 @@ class Users_Controller extends Base_Controller {
 
     public function get_jobs($id)
     {
-        $jobs=User::find($id)->jobs()->paginate(2);
+        $jobs=User::find($id)->jobs()->where_status('on Progress')->paginate(2);
         return View::make('job.index')
             ->with('jobs',$jobs);
     }
@@ -67,6 +74,7 @@ class Users_Controller extends Base_Controller {
         if (Auth::check()) {
 
             $sup_id=Auth::user()->id;
+
             $input=array(
             'fname'=>Input::get('fname'),
             'lname'=>Input::get('lname'),
@@ -76,16 +84,32 @@ class Users_Controller extends Base_Controller {
             'phone'=>Input::get('phone'),
             'skills'=>Input::get('skills')
             );
+            $user=User::create($input);
+            $user->roles()->attach($role_id);
+
         }
-        $user=User::create($input);
-        $user->roles()->attach($role_id);
+
+            $input=array(
+            'fname'=>Input::get('fname'),
+            'lname'=>Input::get('lname'),
+            'email'=>Input::get('email'),
+            'password'=>Hash::Make(Input::get('pass')),
+            'phone'=>Input::get('phone'),
+            'skills'=>Input::get('skills')
+            );
+                $user=User::create($input);
+                $id=$user->id;
+                $user->roles()->attach($role_id);
+
+        $supid=array('sup_id' => $id );
+        User::update($id,$supid);
         //After Adding the User Attach him to a project
         if (Input::get('id')) {
             $p_id=Input::get('id');
             $user->projects()->attach($p_id);
             return Redirect::to_route('project',$p_id);
         }
-        return Redirect::to_route('user',$user->id);
+        return Redirect::to_route('user',$id);
         //            
 
     }    
@@ -98,8 +122,16 @@ class Users_Controller extends Base_Controller {
 
     public function get_show($id)
     {
-        $user=User::find($id);
+        if (Auth::check()) {
+          $user=User::find($id);
         return View::make('user.show' , $user->to_array());
+        }
+        else
+        {
+            $msg='Login to access your account!';
+            return Redirect::to_route('login')
+                    ->with('msg' , $msg);
+        }
     }    
 
     public function get_edit($id)

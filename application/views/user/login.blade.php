@@ -6,6 +6,7 @@
 @if (Session::has('login_errors'))
     <span class="alert alert-error" data-dismiss="alert">Username or password incorrect!</span>
 @endif
+
  {{Form::token()}}
 <h2 class="form-signin-heading">Please Sign in</h2>
 	<input type="email" class="input-block-level" placeholder="Email address" name="email" required="required">
