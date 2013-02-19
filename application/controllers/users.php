@@ -7,16 +7,23 @@ class Users_Controller extends Base_Controller {
     public function get_index()
     {
         $sup_id=Auth::user()->id;
-        $users=User::where_sup_id($sup_id)->paginate(3);
+        $users=User::where_sup_id($sup_id)->paginate(2);
         $total=count($users);
         return View::make('user.index')->with('users',$users);
     }    
 
     public function get_projects($id)
     {
-        $projects=User::find($id)->projects()->paginate(3);
+        $projects=User::find($id)->projects()->paginate(2);
         return View::make('project.index')
             ->with('projects',$projects);
+    }
+
+    public function get_jobs($id)
+    {
+        $jobs=User::find($id)->jobs()->paginate(2);
+        return View::make('job.index')
+            ->with('jobs',$jobs);
     }
 
     public function get_login()
@@ -45,9 +52,7 @@ class Users_Controller extends Base_Controller {
         if(Auth::attempt($user))
         {
             $id=Auth::user()->id;
-            return Redirect::to_route('user',$id)
-                                ->with('title','projects');
-;
+            return Redirect::to_route('user',$id)->with('title','projects');
         }
         else
         {
@@ -85,6 +90,12 @@ class Users_Controller extends Base_Controller {
         //            
 
     }    
+
+    public function get_single()
+    {
+        $id=URI::segment(4);
+        return Redirect::to_route('user' , $id);
+    } 
 
     public function get_show($id)
     {

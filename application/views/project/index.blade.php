@@ -19,9 +19,23 @@
 <div class="hero-unit">
 
 	<!-- Example row of columns -->
+	<?php
+		$user_id=URI::segment(2);
+		if(isset($user_id))
+		{
+			$user=User::find($user_id);
+			$user_fname=$user->fname;
+			$msg=$user_fname.' has no projects!';
+		}
+		else
+		{
+			$msg=Auth::user()->fname.' has no projects';
+		}
+		
+		?>
 	@if (!count($projects->results))
 	<div class='row'>
-		<div class='span8'>No Projects</div>
+		<div class='span8'>{{$msg}}</div>
 
 	</div>
 	@endif
@@ -29,28 +43,21 @@
 		@foreach ($projects->results as $project)
 		<div class="span2">
 
-			<h3>{{Str::title($project->title)}}</h3>
+			<h5>{{Str::title($project->title)}}</h5>
 			<h4>{{Project::find($project->id)->jobs()->count();}} Tasks</h4>
 			<h4>{{Project::find($project->id)->users()->count();}} Members</h4>
+			<h4>{{Project::find($project->id)->status;}}</h4>
 			<div class="dropdown">
 				<div class="btn-group">
 					<a class="btn" href="projects/{{$project->id}}">View &raquo;</a>
-					@if($project->pm_id==Auth::user()->id)
+					@if($project->sup_id==Auth::user()->id)
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						@if($project->sup_id==Auth::user()->id)
-						<li>
-							<a data-target="#" href="#">Reassign</a>
-						</li>
-
-						<li>
-							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
-						</li>
-						@endif
-						<li class="dropdown-submenu">
+						@if($project->pm_id==Auth::user()->id)
+													<li class="dropdown-submenu">
 							<a tabindex="-1" href="#">Update</a>
 
 							<ul class="dropdown-menu">
@@ -66,7 +73,15 @@
 							</ul>
 						</li>
 						<li>
-							<a data-target="#" href="#">Close</a>
+							<a data-target="#" href="projects/{{$project->id}}/close">Close</a>
+						</li>						
+						@endif
+						<li>
+							<a data-target="#" href="projects/{{$project->id}}/reassign">Reassign</a>
+						</li>
+
+						<li>
+							<a data-target="#" href="projects/{{$project->id}}/delete"  tabindex="-1">Delete</a>
 						</li>
 
 					</ul>

@@ -7,7 +7,11 @@ class Projects_Controller extends Base_Controller {
 	public function get_index()
     {
         $user_id=Auth::user()->id;
-       $projects=Project::where_sup_id($user_id)->paginate(3);
+       $projects=Project::where_sup_id($user_id)->or_where('pm_id','=',$user_id)->paginate(2);
+       if(!$projects->results)
+       {
+            return Redirect::to_route('user_projects' , $user_id);
+       }
             return View::make('project.index')->with('projects',$projects);
     }    
 
@@ -15,11 +19,17 @@ class Projects_Controller extends Base_Controller {
 
     public function get_members($id)
     {
-        $members=Project::find($id)->users()->paginate(3);
+        $members=Project::find($id)->users()->paginate(2);
         return View::make('user.index')
             ->with('users',$members);
     }
 
+    public function get_jobs($id)
+    {
+        $jobs=Project::find($id)->jobs()->paginate(2);
+        return View::make('job.index')
+            ->with('jobs',$jobs);
+    }
 
 	public function post_create()
     {
@@ -43,14 +53,21 @@ class Projects_Controller extends Base_Controller {
         $project->users()->attach($pm_id);
         if($project)
         {
-            Redirect::to_route('projects');
+           return Redirect::to_route('project',$project->id);
         }
-    }    
+    }   
+
+//View Single Project from a normalr user
+    public function get_single()
+    {
+        $id=URI::segment(4);
+        return Redirect::to_route('project' , $id);
+    } 
 
 	public function get_show($id)
     {   
-        $project=Project::find($id);
-        return View::make('project.show' , $project->to_array());
+       $project=Project::find($id);
+       return View::make('project.show' , $project->to_array());
     }    
 
 	public function get_edit($id)
@@ -82,6 +99,44 @@ class Projects_Controller extends Base_Controller {
         Project::update($id,$input);
         return Redirect::to_route('project', $id);
     }    
+
+    public function get_reassign($id)
+    {
+        $project=Project::find($id);   
+        return View::make('project.reassign' , $project->to_array());
+    }
+
+    public function put_reassign()
+    {
+        $id=Input::get('id');
+        $pm_email=Input::get('projectmanager');
+        $pm=User::where_email($pm_email)->first();
+        $pm_id=$pm->id;
+
+        $input=array(
+             'pm_id'=>$pm_id,
+           );
+        Project::update($id,$input);
+        return Redirect::to_route('project', $id);
+    }
+
+     public function get_close($id)
+    {
+        $project=Project::find($id);   
+        return View::make('project.close' , $project->to_array());
+    }
+
+    public function put_close()
+    {
+        $id=Input::get('id');
+       $status=Input::get('status');
+
+        $input=array(
+             'status'=>$status
+           );
+        Project::update($id,$input);
+        return Redirect::to_route('project', $id);
+    }
 
 	public function get_destroy($id)
     {   

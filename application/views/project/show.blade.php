@@ -24,7 +24,7 @@
           <a href="/projects/{{$id}}/members">People</a>
         </li>
         <li>
-          <a href="">Task</a>
+          <a href="/projects/{{$id}}/jobs">Task</a>
         </li>
         <li>
           <a href="">Files</a>
@@ -40,20 +40,15 @@
   <!-- Example row of columns -->
   <?php 
   $pm=User::find($pm_id);
-   $pm_email=$pm->
-  email;
+   $pm_email=$pm->email;
 ?>
   <div class="row">
-   <div class="alert alert-success">
-              <button type="button" class="close" data-dismiss="alert">×</button>
-              <strong>Well done!</strong> You successfully added this project.
-            </div>
     <div class="span2">{{HTML::image($thumb, 'user thumb')}}</div>
     <div class="span6">
       <div class="span3"> <strong>Title:</strong> <em class="text-info">{{Str::title($title)}}</em>
       </div>
       <div class="span3">
-        <strong>Manager:</strong> <em class="text-info">{{$pm_email}}</em>
+        <strong>Manager:</strong> <em class="text-info"><a href="/users/{{$pm_id}}">{{$pm_email}}</a></em>
       </div>
       <div class="span3">
         <strong>Start Date:</strong>

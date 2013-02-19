@@ -33,9 +33,11 @@
 */// user Resource
 Route::get('users', array('as' => 'users', 'before'=>'auth','uses' => 'users@index'));
 Route::get('/users/(:num)/projects', array('as' => 'user_projects', 'uses' => 'users@projects'));
+Route::get('/users/(:num)/jobs', array('as' => 'user_jobs', 'uses' => 'users@jobs'));
 Route::get('users/new/(:num)', array('as'=>'add_new_user', 'uses'=>'users@new'));
 Route::get('users/new', array('as' => 'new_user', 'uses' => 'users@new'));
 Route::get('users/(:any)', array('as' => 'user', 'uses' => 'users@show'));
+Route::get('projects/(:num)/users/(:num)', array('as' => 'single_user', 'uses' => 'users@single'));
 Route::get('users/(:any)/edit', array('as' => 'edit_user', 'uses' => 'users@edit'));
 Route::put('users/update', 'users@update');
 Route::get('users/(:any)/delete', 'projects@destroy');
@@ -65,12 +67,19 @@ Route::get('logout', array('as' => 'logout', 'uses' => 'users@logout'));
 // project Resource
 Route::get('projects', array('as' => 'projects','before'=>'auth', 'uses' => 'projects@index'));
 Route::get('projects/(:any)', array('as' => 'project', 'uses' => 'projects@show'));
+Route::get('/projects/(:num)/jobs', array('as' => 'project_jobs', 'uses' => 'projects@jobs'));
+Route::get('users/(:num)/projects/(:num)', array('as' => 'single_project', 'uses' => 'projects@single'));
+Route::get('users/(:num)/jobs/(:num)', array('as' => 'single_job', 'uses' => 'jobs@single'));
 Route::get('projects/new', array('as' => 'new_project', 'uses' => 'projects@new'));
 Route::get('projects/(:any)/edit', array('as' => 'edit_project', 'uses' => 'projects@edit'));
 Route::get('projects/(:num)/members', array('as' => 'project_members', 'uses' => 'projects@members'));
 Route::post('projects', 'projects@create');
 Route::put('projects/update', 'projects@update');
 Route::get('projects/(:any)/delete', 'projects@destroy');
+Route::get('projects/(:any)/reassign', 'projects@reassign');
+Route::put('projects/reassign', 'projects@reassign');
+Route::get('projects/(:any)/close', 'projects@close');
+Route::put('projects/close', 'projects@close');
 
 
 //Home Routes

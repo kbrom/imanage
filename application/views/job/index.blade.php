@@ -19,9 +19,23 @@
 <div class="hero-unit">
 
 	<!-- Example row of columns -->
+	<?php
+		$user_id=URI::segment(2);
+		if(isset($user_id))
+		{
+			$user=User::find($user_id);
+			$user_fname=$user->fname;
+			$msg=$user_fname.' has no tasks!';
+		}
+		else
+		{
+			$msg=Auth::user()->fname.' has no tasks';
+		}
+		
+		?>
 	@if (!count($jobs->results))
-		<div class='row'>
-		<div class='span8'>No Tasks</div>
+	<div class='row'>
+		<div class='span8'>{{$msg}}</div>
 
 	</div>
 	@endif
@@ -32,6 +46,7 @@
 		$pm_id=$project->pm_id;?>
 		<div class="span2">
 			<h3>{{Str::title($job->title)}}</h3>
+			<h4>{{Str::title($job->status)}}</h4>
 			<div class="dropdown">
 				<div class="btn-group">
 					<a class="btn" href="jobs/{{$job->id}}">View &raquo;</a>
@@ -65,8 +80,9 @@
 		</div>
 		@endforeach
 		
-{{$jobs->links();}}
 
 	</div>
+	{{$jobs->links();}}
+
 </div>
 @endsection

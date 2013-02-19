@@ -30,15 +30,22 @@
         </li>
         @endif
         @endforeach
+        @if ($id==Auth::user()->id)
+
+          <li>
+            <a href="/projects">Projects</a>
+         </li>
          <li>
+            <a href="/jobs">Tasks</a>
+         </li>
+        @else
+            <li>
           <a href="/users/{{$id}}/projects">Projects</a>
         </li>
-        <li>
-          <a href="/jobs">Tasks</a>
+          <li>
+          <a href="/users/{{$id}}/jobs">Tasks</a>
         </li>
-        <li>
-          <a href="#">Discussions</a>
-        </li>
+        @endif
         @if(Auth::check() && $id==Auth::user()->id)
         <li>
           {{HTML::link_to_route('logout','Logout')}}

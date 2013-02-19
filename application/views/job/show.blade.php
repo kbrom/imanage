@@ -29,6 +29,10 @@
       </div>
         <hr>
   <!-- Example row of columns -->
+  <?php 
+  $ass=User::find($user_id);
+   $ass_email=$ass->email;
+?>
 
       <div class="row">
         <div class="span2">
@@ -37,7 +41,7 @@
         </div>
       <div class="span6">
           <div class="span3"><strong>Title: </strong><em class="text-info">{{Str::title($title)}}</em></div>
-          <div class="span3"><strong>Assigned to: </strong><em class="text-info">{{$user_id}}</em></div>
+          <div class="span3"><strong>Assigned to: </strong><em class="text-info"><a href="/users/{{$user_id}}">{{$ass_email}}</a></em></div>
           <div class="span3"><strong>Start Date: </strong><em class="text-info">{{Str::limit($startdate,10)}}</em></div>
           <div class="span3"><strong>End Date: </strong><em class="text-info">{{Str::limit($enddate,10)}}</em></div>
           <div class="span3"><strong>Status: </strong><em class="text-info">{{Str::title($status)}}</em></div>

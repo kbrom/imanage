@@ -7,12 +7,16 @@ class Jobs_Controller extends Base_Controller {
 	public function get_index()
     {
        $user_id=Auth::user()->id;
-       $projects=User::find($user_id)->projects()->paginate(3);
        $jobs=User::find($user_id)->jobs()->paginate(3);
-
-         return View::make('job.index')->with('jobs',$jobs);
+                return View::make('job.index')->with('jobs',$jobs);
     
     }    
+
+    public function get_single()
+    {
+        $id=URI::segment(4);
+        return Redirect::to_route('job' , $id);
+    } 
 
 	public function post_create()
     {
@@ -30,9 +34,14 @@ class Jobs_Controller extends Base_Controller {
             'status'=>'On Progress'
             );
         $job=Job::create($input);
+        //After assigning a task make the user member of the project
+        $project_id=Input::get('id');
+        $user=User::find($member_id);
+        $user->projects()->attach($project_id);
+
         if($job)
         {
-            return Redirect::to_route('jobs');
+            return Redirect::to_route('job' , $job->id);
         }
     }    
 
@@ -49,7 +58,7 @@ class Jobs_Controller extends Base_Controller {
 
 	public function get_new()
     {
-        $id=$segment = URI::segment(3);
+        $id = URI::segment(3);
           return View::make('job.new')->with('id',$id);
     }    
 

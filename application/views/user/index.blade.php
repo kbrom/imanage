@@ -19,9 +19,23 @@
 <div class="hero-unit">
 
 	<!-- Example row of columns -->
+	<?php
+		$user_id=URI::segment(2);
+		if(isset($user_id))
+		{
+			$user=User::find($user_id);
+			$user_fname=$user->fname;
+			$msg=$user_fname.' has no users!';
+		}
+		else
+		{
+			$msg=Auth::user()->fname.' has no users';
+		}
+		
+		?>
 	@if (!count($users->results))
-		<div class='row'>
-		<div class='span8'>No Users</div>
+	<div class='row'>
+		<div class='span8'>{{$msg}}</div>
 
 	</div>
 	@endif
@@ -59,7 +73,7 @@
 			$roles = User::find(Auth::user()->id)->roles()->get();?>
 			@foreach($roles as $role)
 			
-				@if($role->id==1)
+				@if($role->id==2 || $role->id==1)
 		<div class="span2">
 
 			<h4>Add New User</h4>
