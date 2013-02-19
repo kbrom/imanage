@@ -1,6 +1,6 @@
 // public/js/script.js
 $(document).ready(function() {
-    $('#view').click(function(e) {
+    $('#descs').click(function(e) {
         // prevent the links default action
         // from firing
         e.preventDefault();

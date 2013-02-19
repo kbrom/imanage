@@ -38,6 +38,11 @@
 		<div class='span8'>{{$msg}}</div>
 
 	</div>
+	@else
+			<div class='row'>
+	<div class='span8'>Users</div>
+
+</div>
 	@endif
 	<div class="row">
 			@foreach ($users->results as $user)

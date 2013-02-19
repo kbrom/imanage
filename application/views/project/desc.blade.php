@@ -32,42 +32,28 @@
         <li>
           <a href="">Discussions</a>
         </li>
-        <li>
-          <a href="/projects/{{$id}}/desc" id="desc">Description</a>
+        <li  class="active">
+          <a href="#" id="desc">Description</a>
         </li>
       </ul>
     </div>
 
   </div>
+
   <hr>
+  <div class='row'>
+  <div class='span8'>Detailed Description</div>
+
+</div>
+<hr>
   <!-- Example row of columns -->
-  <?php 
-  $pm=User::find($pm_id);
-   $pm_email=$pm->email;
-?>
+  
   <div class="row">
-    <div class="span2">{{HTML::image($thumb, 'user thumb')}}</div>
-    <div class="span6">
-      <div class="span3"> <strong>Title:</strong> <em class="text-info">{{Str::title($title)}}</em>
-      </div>
-      <div class="span3">
-        <strong>Manager:</strong> <em class="text-info"><a href="/users/{{$pm_id}}">{{$pm_email}}</a></em>
-      </div>
-      <div class="span3">
-        <strong>Start Date:</strong>
-        <em class="text-info">{{Str::limit($startdate,10)}}</em>
-      </div>
-      <div class="span3">
-        <strong>End Date:</strong>
-        <em class="text-info">{{Str::limit($enddate,10)}}</em>
-      </div>
-      <div class="span3">
-        <strong>Status:</strong>
-        <em class="text-info">{{Str::title($status)}}</em>
-      </div>
+    <div class="span9">
+      {{$desc}}
     </div>
-    <div class="span9">{{$shortdesc}}</div>
 
   </div>
+   <hr>
 </div>
 @endsection

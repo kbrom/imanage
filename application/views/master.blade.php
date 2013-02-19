@@ -7,6 +7,7 @@
    {{ HTML::style('css/style.css')}}
    {{HTML::script('js/vendors/jquery-latest.js')}}
    {{HTML::script('js/vendors/bootstrap.js')}}
+   {{HTML::script('js/script.js')}}
    
 </head>
 <body>

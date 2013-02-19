@@ -21,11 +21,17 @@
 	<!-- Example row of columns -->
 	<?php
 		$user_id=URI::segment(2);
-		if(isset($user_id))
+		$project_id=URI::segment(2);
+		$item=URI::segment(1);
+		if(isset($user_id) && $item=='users')
 		{
 			$user=User::find($user_id);
 			$user_fname=$user->fname;
 			$msg=$user_fname.' has no tasks!';
+		}
+		elseif (isset($project_id) && $item=='projects') 
+		{
+			$msg='This Project has no tasks';
 		}
 		else
 		{
@@ -38,41 +44,52 @@
 		<div class='span8'>{{$msg}}</div>
 
 	</div>
+	@else
+			<div class='row'>
+	<div class='span8'>Tasks</div>
+
+</div>
 	@endif
 	<div class="row">
 	
 		@foreach ($jobs->results as $job)
 		<?php $project=Job::find($job->id)->project;
-		$pm_id=$project->pm_id;?>
+		if ($project) {
+			$pm_id=$project->pm_id;
+			
+		}
+		else
+			$pm_id='blah';
+		?>
 		<div class="span2">
-			<h3>{{Str::title($job->title)}}</h3>
+			<h5>{{Str::title($job->title)}}</h5>
 			<h4>{{Str::title($job->status)}}</h4>
 			<div class="dropdown">
 				<div class="btn-group">
-					<a class="btn" href="jobs/{{$job->id}}">View &raquo;</a>
-					@if($job->user_id==Auth::user()->id)
+					<a class="btn" href="/jobs/{{$job->id}}">View &raquo;</a>
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
-						@if($pm_id==Auth::user()->id)
-						<li>
-							<a tabindex="-1" href="#">Edit</a>
-
-						</li>
-						<li>
-							<a data-target="#" href="#">Reassign</a>
-						</li>
-
-						<li>
-							<a data-target="#" href="#"  tabindex="-1">Delete</a>
+						@if($job->user_id==Auth::user()->id)
+							<li>
+							<a data-target="#" href="/jobs/{{$job->id}}/close">Close</a>
 						</li>
 						@endif
+											@if($pm_id==Auth::user()->id)
+
 						<li>
-							<a data-target="#" href="#">Close</a>
+							<a tabindex="-1" href="/jobs/{{$job->id}}/edit">Edit</a>
+
+						</li>
+						<li>
+							<a data-target="#" href="/jobs/{{$job->id}}/reassign">Reassign</a>
 						</li>
 
+						<li>
+							<a data-target="#" href="/jobs/{{$job->id}}/delete"  tabindex="-1">Delete</a>
+						</li>
 					</ul>
 					@endif
 				</div>

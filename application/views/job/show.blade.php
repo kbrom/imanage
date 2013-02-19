@@ -20,7 +20,8 @@
   <div class="row">
         <div class="span5">
           <ul class="nav nav-pills">
-            <li><a href="#">Description</a></li>
+            <li>          <a href="/jobs/{{$id}}/desc" id="desc">Description</a>
+</li>
             <li><a href="#">Files</a></li>
             <li><a href="#">Discussions</a></li>
         </ul>

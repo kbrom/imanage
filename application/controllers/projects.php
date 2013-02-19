@@ -7,11 +7,8 @@ class Projects_Controller extends Base_Controller {
 	public function get_index()
     {
         $user_id=Auth::user()->id;
-       $projects=Project::where_sup_id($user_id)->or_where('pm_id','=',$user_id)->paginate(2);
-       if(!$projects->results)
-       {
-            return Redirect::to_route('user_projects' , $user_id);
-       }
+       $projects=User::find($user_id)->projects()->paginate(2);
+  
             return View::make('project.index')->with('projects',$projects);
     }    
 
@@ -26,9 +23,17 @@ class Projects_Controller extends Base_Controller {
 
     public function get_jobs($id)
     {
-        $jobs=Project::find($id)->jobs()->paginate(2);
+        $project=Project::find($id);
+        $jobs=$project->jobs()->paginate(3);
         return View::make('job.index')
             ->with('jobs',$jobs);
+    }
+
+    public function get_desc($id)
+    {
+        $project=Project::find($id);
+       return View::make('project.desc' , $project->to_array());
+        //return Response::json($project->to_array());
     }
 
 	public function post_create()
@@ -49,8 +54,12 @@ class Projects_Controller extends Base_Controller {
             'status'=>'On Progress'
             );
         $project=Project::create($input);
-        $project->users()->attach($sup_id);
+
+        if ($sup_id!=$pm_id) {
+            $project->users()->attach($sup_id);
         $project->users()->attach($pm_id);
+        }
+        $project->users()->attach($sup_id);
         if($project)
         {
            return Redirect::to_route('project',$project->id);

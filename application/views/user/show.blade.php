@@ -80,7 +80,7 @@
       </div>
       <div class="span3">
         <strong>Working On:</strong>
-        <em class="text-info">9 tasks from 4 projects</em>
+        <em class="text-info">{{User::find($id)->jobs()->count();}} tasks from {{User::find($id)->projects()->count();}} projects</em>
       </div>
     </div>
     <div class="span9">Short Bio</div>

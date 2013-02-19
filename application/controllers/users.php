@@ -8,7 +8,6 @@ class Users_Controller extends Base_Controller {
     {
         $sup_id=Auth::user()->id;
         $users=User::where_sup_id($sup_id)->paginate(2);
-        $total=count($users);
         return View::make('user.index')->with('users',$users);
     }    
 

@@ -44,12 +44,19 @@ Route::get('users/(:any)/delete', 'projects@destroy');
 
 // job Resource
 Route::get('jobs', array('as' => 'jobs', 'uses' => 'jobs@index'));
+Route::get('jobs/(:any)/delete', 'jobs@destroy');
 Route::get('jobs/new/(:num)', array('as'=>'new_job', 'uses'=>'jobs@new'));
 Route::get('jobs/(:num)', array('as' => 'job', 'uses' => 'jobs@show'));
 Route::get('jobs/(:any)/edit', array('as' => 'edit_job', 'uses' => 'jobs@edit'));
 Route::post('jobs', 'jobs@create');
 Route::put('jobs/update', 'jobs@update');
-Route::delete('jobs/(:any)', 'jobs@destroy');
+Route::get('jobs/(:any)/reassign', 'jobs@reassign');
+Route::put('jobs/reassign', 'jobs@reassign');
+Route::get('jobs/(:any)/close', 'jobs@close');
+Route::put('jobs/close', 'jobs@close');
+Route::get('jobs/(:any)/desc', 'jobs@desc');
+
+
 
 
 //Registering Routes
@@ -76,6 +83,7 @@ Route::get('projects/(:num)/members', array('as' => 'project_members', 'uses' =>
 Route::post('projects', 'projects@create');
 Route::put('projects/update', 'projects@update');
 Route::get('projects/(:any)/delete', 'projects@destroy');
+Route::get('projects/(:any)/desc', 'projects@desc');
 Route::get('projects/(:any)/reassign', 'projects@reassign');
 Route::put('projects/reassign', 'projects@reassign');
 Route::get('projects/(:any)/close', 'projects@close');
