@@ -37,6 +37,12 @@
 					<input type="text" class="input-large" id="lname" name="lname" required="required" value="{{$lname}}"></div>
 			</div>
 
+
+			<div class="control-group">
+				<label class="control-label">Email</label>
+				<div class="controls">
+					<input type="text" class="input-large" id="email" name="email" required="required" value="{{$email}}"></div>
+			</div>
 			
 			<div class="control-group">
 				<label class="control-label">Phone</label>

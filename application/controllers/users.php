@@ -6,10 +6,11 @@ class Users_Controller extends Base_Controller {
 
     public function get_index()
     {
-        if (Auth::check()) {
-            $sup_id=Auth::user()->id;
-        $users=User::where_sup_id($sup_id)->paginate(2);
-        return View::make('user.index')->with('users',$users);
+        if (Auth::check())
+         {
+                $sup_id=Auth::user()->id;
+            $users=User::where_sup_id($sup_id)->paginate(2);
+            return View::make('user.index')->with('users',$users);
         }
         else
         {
@@ -58,6 +59,13 @@ class Users_Controller extends Base_Controller {
         if(Auth::attempt($user))
         {
             $id=Auth::user()->id;
+            $roles=User::find($id)->roles()->get();
+
+            foreach ($roles as $role) {
+                if ($role->id==1) {
+                    return Redirect::to_route('home');
+                }
+            }
             return Redirect::to_route('user',$id)->with('title','projects');
         }
         else
@@ -74,7 +82,6 @@ class Users_Controller extends Base_Controller {
         if (Auth::check()) {
 
             $sup_id=Auth::user()->id;
-
             $input=array(
             'fname'=>Input::get('fname'),
             'lname'=>Input::get('lname'),
@@ -86,8 +93,10 @@ class Users_Controller extends Base_Controller {
             );
             $user=User::create($input);
             $user->roles()->attach($role_id);
-
         }
+
+        else
+        {
 
             $input=array(
             'fname'=>Input::get('fname'),
@@ -100,16 +109,24 @@ class Users_Controller extends Base_Controller {
                 $user=User::create($input);
                 $id=$user->id;
                 $user->roles()->attach($role_id);
+                $supid=array('sup_id' => $id );
+                User::update($id,$supid);
 
-        $supid=array('sup_id' => $id );
-        User::update($id,$supid);
+        }
+                $id=$user->id;
+
         //After Adding the User Attach him to a project
-        if (Input::get('id')) {
+        if (Input::get('id')) 
+        {
             $p_id=Input::get('id');
             $user->projects()->attach($p_id);
             return Redirect::to_route('project',$p_id);
         }
-        return Redirect::to_route('user',$id);
+        else
+        {
+            return Redirect::to_route('user',$id);
+        }
+        
         //            
 
     }    
@@ -152,6 +169,7 @@ class Users_Controller extends Base_Controller {
         $id=Input::get('id');
         $input=array(
             'fname'=>Input::get('fname'),
+            'email'=>Input::get('email'),
             'lname'=>Input::get('lname'),
             'phone'=>Input::get('phone'),
             'skills'=>Input::get('skills')
@@ -162,6 +180,8 @@ class Users_Controller extends Base_Controller {
 
    public function get_destroy($id)
     {   
+       User::find($id)->jobs()->delete();
+       User::find($id)->projects()->delete();
        User::find($id)->delete();
        return Redirect::to_route('users');
     }

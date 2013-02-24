@@ -40,7 +40,7 @@ class Projects_Controller extends Base_Controller {
     {
         $pm_email=Input::get('projectmanager');
         //$user = User::where_email($email)->first();
-        $pm=User::where_email($pm_email)->first();
+        $pm=User::where_email($pm_email);
         $pm_id=$pm->id;
         $sup_id=Auth::user()->id;
         $input=array(
@@ -152,6 +152,8 @@ class Projects_Controller extends Base_Controller {
 
 	public function get_destroy($id)
     {   
+       Project::find($id)->jobs()->delete();
+       Project::find($id)->users()->delete();
        Project::find($id)->delete();
        return Redirect::to_route('projects');
     }

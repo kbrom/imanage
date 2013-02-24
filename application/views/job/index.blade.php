@@ -75,7 +75,7 @@
 					</button>
 					<ul class="dropdown-menu">
 							<li>
-							<a data-target="#" href="/jobs/{{$job->id}}/close">Close</a>
+							<a data-target="#" href="/jobs/{{$job->id}}/close">Change Status</a>
 						</li>
 						@endif
 											@if($pm_id==Auth::user()->id)

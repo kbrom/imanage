@@ -14,8 +14,7 @@
 	</div>
 	<div class="row">
 		<?php 
-	$user=User::find($pm_id)->
-		first();
+	$user=User::find($pm_id);
 	$user_email=$user->email;
 
 ?>

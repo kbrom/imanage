@@ -6,9 +6,17 @@ class Jobs_Controller extends Base_Controller {
 
 	public function get_index()
     {
-       $user_id=Auth::user()->id;
-       $jobs=User::find($user_id)->jobs()->paginate(3);
+       if(Auth::check())
+       {
+             $user_id=Auth::user()->id;
+            $jobs=User::find($user_id)->jobs()->paginate(3);
                 return View::make('job.index')->with('jobs',$jobs);
+       }
+       else
+       {
+        return Redirect::to_route('login');
+       }
+      
     
     }    
 

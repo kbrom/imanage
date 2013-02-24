@@ -21,12 +21,6 @@
     <div class="span5">
       <ul class="nav nav-pills">
         <li>
-          <a href="/projects/{{$id}}/members">People</a>
-        </li>
-        <li>
-          <a href="/projects/{{$id}}/jobs">Task</a>
-        </li>
-        <li>
           <a href="">Files</a>
         </li>
         <li>

@@ -55,12 +55,13 @@
 			<div class="dropdown">
 				<div class="btn-group">
 					<a class="btn" href="projects/{{$project->id}}">View &raquo;</a>
-					@if($project->sup_id==Auth::user()->id)
 					<button data-toggle="dropdown" class="btn btn-primary dropdown-toggle">
 						Action
 						<span class="caret"></span>
 					</button>
 					<ul class="dropdown-menu">
+					@if($project->sup_id==Auth::user()->id)
+					
 					<li>
 							<a data-target="#" href="projects/{{$project->id}}/reassign">Reassign</a>
 						</li>
@@ -87,7 +88,7 @@
 							</ul>
 						</li>
 						<li>
-							<a data-target="#" href="projects/{{$project->id}}/close">Close</a>
+							<a data-target="#" href="projects/{{$project->id}}/close">Change Status</a>
 						</li>
 						
 
