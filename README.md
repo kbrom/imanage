@@ -1,4 +1,4 @@
-iManage
+#iManage
 =======
 
-iManage is state of the art project management sexy web app!
+iManage is a role based project management web app built with laravel!
