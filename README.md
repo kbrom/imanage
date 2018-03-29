@@ -3,7 +3,7 @@
 
 iManage is a role based project management web app built with laravel!
 
-##Developer Team
+##Developer Team </br>
 Tekeste G/anenia
 Tesfit G/meskel
 Kibrom Haftu
